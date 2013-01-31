@@ -1,0 +1,111 @@
+<project name="nwpe" default="help" basedir=".">
+
+    <property name="tmp" location="tmp"/>
+    <property name="dl" location="downloads"/>
+    <property name="nw" location="node-webkit"/>
+    <property name="ij" location="installjammer"/>
+
+    <property name="tpl" location="project-templates"/>
+
+    <dirname property="sdk.root" file="${ant.file}" />
+
+    <target name="help">
+        <echo>
+Node-webkit SDK.
+
+    ant sdk    - download and unpack tools
+    ant create - create project from template:
+        -Dtemplate=default
+        -Ddir=/abs/path/to/project
+        </echo>
+    </target>
+
+    <target name="create">
+        <copy todir="${dir}">
+            <fileset dir="${tpl}/${template}" />
+            <filterset>
+                <filter token="SDK" value="${sdk.root}" />
+            </filterset>
+        </copy>
+    </target>
+
+    <target name="sdk" depends="init,download,unpack" />
+
+    <target name="init">
+        <mkdir dir="${tmp}"/>
+
+        <mkdir dir="${nw}"/>
+        <mkdir dir="${ij}"/>
+
+        <mkdir dir="${nw}/l32"/>
+        <mkdir dir="${dl}/l32"/>
+
+        <mkdir dir="${nw}/l64"/>
+        <mkdir dir="${dl}/l64"/>
+
+        <mkdir dir="${nw}/win"/>
+        <mkdir dir="${dl}/win"/>
+
+        <mkdir dir="${dl}/ij"/>
+    </target>
+
+    <target name="download">
+        <get src="https://s3.amazonaws.com/node-webkit/v0.4.0/node-webkit-v0.4.0-linux-ia32.tar.gz"
+            dest="${dl}/l32/"
+            verbose="true"
+            usetimestamp="true" />
+
+        <get src="https://s3.amazonaws.com/node-webkit/v0.4.0/node-webkit-v0.4.0-linux-x64.tar.gz"
+            dest="${dl}/l64/"
+            verbose="true"
+            usetimestamp="true" />
+
+        <get src="https://s3.amazonaws.com/node-webkit/v0.4.0/node-webkit-v0.4.0-win-ia32.zip"
+            dest="${dl}/win/"
+            verbose="true"
+            usetimestamp="true" />
+
+        <get src="http://sourceforge.net/projects/installjammer/files/latest/download"
+            dest="${dl}/ij/installjammer.tar.gz"
+            verbose="true"
+            usetimestamp="true" />
+    </target>
+
+    <target name="unpack">
+        <!-- linux 32 -->
+        <delete dir="${nw}/l32"/>
+        <gunzip src="${dl}/l32/node-webkit-v0.4.0-linux-ia32.tar.gz" />
+        <untar src="${dl}/l32/node-webkit-v0.4.0-linux-ia32.tar"
+            dest="${tmp}/"/>
+        <delete file="${dl}/l32/node-webkit-v0.4.0-linux-ia32.tar" />
+        <move file="${tmp}/node-webkit-v0.4.0-linux-ia32" tofile="${nw}/l32"/>
+        <chmod file="${nw}/l32/nw" perm="ugo+x" />
+
+        <!-- linux 64 -->
+        <delete dir="${nw}/l64"/>
+        <gunzip src="${dl}/l64/node-webkit-v0.4.0-linux-x64.tar.gz" />
+        <untar src="${dl}/l64/node-webkit-v0.4.0-linux-x64.tar"
+            dest="${tmp}/"/>
+        <delete file="${dl}/l64/node-webkit-v0.4.0-linux-x64.tar" />
+        <move file="${tmp}/node-webkit-v0.4.0-linux-x64" tofile="${nw}/l64"/>
+        <chmod file="${nw}/l64/nw" perm="ugo+x" />
+
+        <!-- windows -->
+        <delete dir="${nw}/win"/>
+        <unzip src="${dl}/win/node-webkit-v0.4.0-win-ia32.zip"
+                dest="${tmp}/" />
+        <move file="${tmp}/node-webkit-v0.4.0-win-ia32" tofile="${nw}/win"/>
+        <chmod file="${nw}/win/nw.exe" perm="ugo+x" />
+
+        <!-- installjammer -->
+        <delete dir="${ij}"/>
+        <gunzip src="${dl}/ij/installjammer.tar.gz" />
+        <untar src="${dl}/ij/installjammer.tar"
+            dest="${tmp}/"/>
+        <delete file="${dl}/ij/installjammer.tar" />
+        <move file="${tmp}/installjammer" tofile="${ij}"/>
+        <chmod file="${ij}/installjammer" perm="ugo+x" />
+
+    </target>
+
+</project>

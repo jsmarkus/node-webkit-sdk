@@ -1,0 +1,10 @@
+<project name="nwpe" default="app.nw" basedir=".">
+	<property name="sdk" location="@SDK@" />
+	<property name="src" location="src" />
+	<property name="build" location="build" />
+
+	<target name="app.nw">
+		<mkdir dir="${build}" />
+		<zip basedir="${src}" destfile="${build}/app.nw" />
+	</target>
+</project>
