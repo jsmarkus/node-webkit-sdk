@@ -1,8 +1,10 @@
 <project name="nwpe" default="help" basedir=".">
     <property name="sdk" location="@SDK@" />
     <property name="sdk.nw" location="${sdk}/node-webkit" />
+    <property name="sdk.ij" location="${sdk}/installjammer/installjammer" />
     <property name="src" location="src" />
     <property name="build" location="build" />
+    <property name="jammer" location="jammer" />
 
     <target name="help">
         <echo>
@@ -22,7 +24,29 @@ ant bin.win
     - create binary executable for Windows
 
 ant bin.all
-    - create binary executable for all supported platforms
+    - create binary executables for all supported platforms
+
+ant dist.l32
+    - create installer package for 32-bit Linux
+
+ant dist.l64
+    - create installer package for 64-bit Linux
+
+ant dist.win
+    - create installer package for Windows
+
+ant dist.all
+    - create installer packages for all supported platforms
+
+ant distconf.l32
+    - configure installer package for 32-bit Linux
+
+ant distconf.l64
+    - configure installer package for 64-bit Linux
+
+ant distconf.win
+    - configure installer package for Windows
+
         </echo>
     </target>
 
@@ -87,5 +111,53 @@ ant bin.all
 
     <!-- Windows binary -->
     <target name="bin.all" depends="bin.l32,bin.l64,bin.win" />
+    <!--**********************************************************-->
+    <!--**********************************************************-->
+    <!--**********************************************************-->
+    <!--**********************************************************-->
+
+    <!-- Configure installjammer project Linux 64 bit -->
+    <target name="distconf.l64">
+        <exec executable="${sdk.ij}">
+            <arg value="--" />
+            <arg value="${jammer}/l64" />
+        </exec>
+    </target>
+    <!-- Configure installjammer project Linux 32 bit -->
+    <target name="distconf.l32">
+        <exec executable="${sdk.ij}">
+            <arg value="--" />
+            <arg value="${jammer}/l32" />
+        </exec>
+    </target>
+    <!-- Configure installjammer project Windows -->
+    <target name="distconf.win">
+        <exec executable="${sdk.ij}">
+            <arg value="--" />
+            <arg value="${jammer}/win" />
+        </exec>
+    </target>
+
+    <!-- Build installjammer project Linux 64 bit -->
+    <target name="dist.l64" depends="bin.l64">
+        <exec executable="${sdk.ij}">
+            <arg value="--build ${jammer}/l64" />
+        </exec>
+    </target>
+    <!-- Build installjammer project Linux 32 bit -->
+    <target name="dist.l32" depends="bin.l32">
+        <exec executable="${sdk.ij}">
+            <arg value="--build ${jammer}/l32" />
+        </exec>
+    </target>
+    <!-- Build installjammer project Windows -->
+    <target name="dist.win" depends="bin.win">
+        <exec executable="${sdk.ij}">
+            <arg value="--build ${jammer}/win" />
+        </exec>
+    </target>
+    <!-- Build installjammer projects for all platforms -->
+    <target name="dist.all" depends="dist.l32,dist.l64,dist.win" />
+
 
 </project>

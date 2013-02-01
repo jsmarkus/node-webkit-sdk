@@ -13,10 +13,15 @@
         <echo>
 Node-webkit SDK.
 
-    ant sdk    - download and unpack tools
-    ant create - create project from template:
-        -Dtemplate=default
-        -Ddir=/abs/path/to/project
+
+    ant sdk
+        - download and unpack tools
+
+
+    ant create -Dtemplate=TEMPLATE_NAME -Ddir=ABS_PATH
+        - create new project from template.
+        Example:
+            ant create -Dtemplate=default -Ddir=/home/user/project1
         </echo>
     </target>
 
