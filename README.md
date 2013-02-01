@@ -5,6 +5,8 @@ SDK for building installable node-webkit applications.
 
 This is a set of tools to build cross-platform (currently Windows, Linux 32bit, Linux 64bit) applications.
 
+You need to install Apache Ant to work with this SDK.
+
 ## SDK
 
 Install:
