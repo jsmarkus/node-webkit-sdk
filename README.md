@@ -26,7 +26,27 @@ Create first project:
 
 The following commands are run from your project's directory.
 
-Pack nw-package:
+View project help:
+
+    ant
+
+Pack all and create installers (the only command you will need):
+
+    ant dist.all
+
+Create installer for 32-bit Linux:
+
+    ant dist.l32
+
+Create installer for 64-bit Linux:
+
+    ant dist.l64
+
+Create installer for Windows:
+
+    ant dist.win
+
+Pack only nw-package:
 
     ant app.nw
 
@@ -46,8 +66,8 @@ Pack binaries for all platforms:
 
     ant bin.all
 
-Configure installjammer project (still TODO):
+Configure installjammer project:
 
-    ant ij.conf.l32    #for linux 32bit
-    ant ij.conf.l64    #for linux 64bit
-    ant ij.conf.win    #for windows
+    ant distconf.l32    #for linux 32bit
+    ant distconf.l64    #for linux 64bit
+    ant distconf.win    #for windows
