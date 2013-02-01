@@ -13,6 +13,8 @@ Install:
     cd node-webkit-sdk
     ant sdk
 
+Patience! It will download latest releases of node-webkit for all platforms and installjammer.
+
 Create first project:
 
     ant create -Dtemplate=default -Ddir=/home/user/project1
@@ -22,11 +24,27 @@ Create first project:
 
 The following commands are run from your project's directory.
 
-Build nw-package:
+Pack nw-package:
 
     ant app.nw
 
-Configure installjammer project (*coming soon!*):
+Pack binaries for 32-bit Linux:
+
+    ant bin.l32
+
+Pack binaries for 64-bit Linux:
+
+    ant bin.l64
+
+Pack binaries for Windows:
+
+    ant bin.win
+
+Pack binaries for all platforms:
+
+    ant bin.all
+
+Configure installjammer project (still TODO):
 
     ant ij.conf.l32    #for linux 32bit
     ant ij.conf.l64    #for linux 64bit
