@@ -66,7 +66,7 @@ Pack binaries for all platforms:
 
     ant bin.all
 
-Configure installjammer project:
+Configure installjammer project (will open InstallJammer UI):
 
     ant distconf.l32    #for linux 32bit
     ant distconf.l64    #for linux 64bit
