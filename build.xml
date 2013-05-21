@@ -1,5 +1,7 @@
 <project name="nwpe" default="help" basedir=".">
 
+    <property name="nw-version" value="0.5.1"/>
+
     <property name="tmp" location="tmp"/>
     <property name="dl" location="downloads"/>
     <property name="nw" location="node-webkit"/>
@@ -12,6 +14,8 @@
     <target name="help">
         <echo>
 Node-webkit SDK.
+
+Current node-webkit version ${nw-version}.
 
 
     ant sdk
@@ -55,17 +59,17 @@ Node-webkit SDK.
     </target>
 
     <target name="download">
-        <get src="https://s3.amazonaws.com/node-webkit/v0.4.0/node-webkit-v0.4.0-linux-ia32.tar.gz"
+        <get src="https://s3.amazonaws.com/node-webkit/v${nw-version}/node-webkit-v${nw-version}-linux-ia32.tar.gz"
             dest="${dl}/l32/"
             verbose="true"
             usetimestamp="true" />
 
-        <get src="https://s3.amazonaws.com/node-webkit/v0.4.0/node-webkit-v0.4.0-linux-x64.tar.gz"
+        <get src="https://s3.amazonaws.com/node-webkit/v${nw-version}/node-webkit-v${nw-version}-linux-x64.tar.gz"
             dest="${dl}/l64/"
             verbose="true"
             usetimestamp="true" />
 
-        <get src="https://s3.amazonaws.com/node-webkit/v0.4.0/node-webkit-v0.4.0-win-ia32.zip"
+        <get src="https://s3.amazonaws.com/node-webkit/v${nw-version}/node-webkit-v${nw-version}-win-ia32.zip"
             dest="${dl}/win/"
             verbose="true"
             usetimestamp="true" />
@@ -79,27 +83,27 @@ Node-webkit SDK.
     <target name="unpack">
         <!-- linux 32 -->
         <delete dir="${nw}/l32"/>
-        <gunzip src="${dl}/l32/node-webkit-v0.4.0-linux-ia32.tar.gz" />
-        <untar src="${dl}/l32/node-webkit-v0.4.0-linux-ia32.tar"
+        <gunzip src="${dl}/l32/node-webkit-v${nw-version}-linux-ia32.tar.gz" />
+        <untar src="${dl}/l32/node-webkit-v${nw-version}-linux-ia32.tar"
             dest="${tmp}/"/>
-        <delete file="${dl}/l32/node-webkit-v0.4.0-linux-ia32.tar" />
-        <move file="${tmp}/node-webkit-v0.4.0-linux-ia32" tofile="${nw}/l32"/>
+        <delete file="${dl}/l32/node-webkit-v${nw-version}-linux-ia32.tar" />
+        <move file="${tmp}/node-webkit-v${nw-version}-linux-ia32" tofile="${nw}/l32"/>
         <chmod file="${nw}/l32/nw" perm="ugo+x" />
 
         <!-- linux 64 -->
         <delete dir="${nw}/l64"/>
-        <gunzip src="${dl}/l64/node-webkit-v0.4.0-linux-x64.tar.gz" />
-        <untar src="${dl}/l64/node-webkit-v0.4.0-linux-x64.tar"
+        <gunzip src="${dl}/l64/node-webkit-v${nw-version}-linux-x64.tar.gz" />
+        <untar src="${dl}/l64/node-webkit-v${nw-version}-linux-x64.tar"
             dest="${tmp}/"/>
-        <delete file="${dl}/l64/node-webkit-v0.4.0-linux-x64.tar" />
-        <move file="${tmp}/node-webkit-v0.4.0-linux-x64" tofile="${nw}/l64"/>
+        <delete file="${dl}/l64/node-webkit-v${nw-version}-linux-x64.tar" />
+        <move file="${tmp}/node-webkit-v${nw-version}-linux-x64" tofile="${nw}/l64"/>
         <chmod file="${nw}/l64/nw" perm="ugo+x" />
 
         <!-- windows -->
         <delete dir="${nw}/win"/>
-        <unzip src="${dl}/win/node-webkit-v0.4.0-win-ia32.zip"
+        <unzip src="${dl}/win/node-webkit-v${nw-version}-win-ia32.zip"
                 dest="${tmp}/" />
-        <move file="${tmp}/node-webkit-v0.4.0-win-ia32" tofile="${nw}/win"/>
+        <move file="${tmp}/node-webkit-v${nw-version}-win-ia32" tofile="${nw}/win"/>
         <chmod file="${nw}/win/nw.exe" perm="ugo+x" />
 
         <!-- installjammer -->

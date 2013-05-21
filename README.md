@@ -17,6 +17,9 @@ Install:
 
 Patience! It will download latest releases of node-webkit for all platforms and installjammer.
 
+    Note: if you need another version of node-webkit, you may
+    specify `-Dnw-version=X.Y.Z` option with `ant sdk`.
+
 Create first project:
 
     ant create -Dtemplate=default -Ddir=/home/user/project1
