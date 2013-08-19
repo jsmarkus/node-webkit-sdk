@@ -1,6 +1,6 @@
 <project name="nwpe" default="help" basedir=".">
 
-    <property name="nw-version" value="0.6.3"/>
+    <property name="nw-version" value="0.7.1"/>
 
     <property name="tmp" location="tmp"/>
     <property name="dl" location="downloads"/>
